@@ -1,0 +1,338 @@
+@charset "utf-8";
+@charset "utf-8";
+* {
+  cursor: none !important;
+}
+/* cursor */
+.cursor {
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+}
+
+.cursor img {
+  width: 100%;
+  height: 100%;
+}
+
+/* ripple (+ GLOW) */
+.ripple {
+  position: fixed;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 0, 0, 0.9);
+  box-shadow:
+    0 0 6px rgba(255, 0, 0, 0.8),
+    0 0 12px rgba(255, 0, 0, 0.6),
+    0 0 24px rgba(255, 0, 0, 0.4);
+  filter: blur(2px);
+  z-index: 9998;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  /* 번지는 속도 조절 */
+  animation: rippleEffect 3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  /* 추가로 아래 js도 조절 */
+}
+
+@keyframes rippleEffect {
+  0% {
+    width: 15px;
+    height: 15px;
+    opacity: 1;
+    box-shadow:
+      0 0 2px rgba(255, 0, 0, 0.9),
+      0 0 4px rgba(255, 0, 0, 0.7);
+  }
+  100% {
+    width: 80px;
+    height: 80px;
+    opacity: 0;
+    box-shadow:
+      0 0 10px rgba(255, 0, 0, 0.4),
+      0 0 20px rgba(255, 0, 0, 0.2),
+      0 0 30px rgba(255, 0, 0, 0.1);
+  }
+}
+
+/* click ripple (burst) */
+.click-ripple {
+  position: fixed;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 0, 0, 1);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  animation: clickRipple 0.6s ease-out forwards;
+  filter: blur(3px);
+  box-shadow:
+    0 0 5px rgba(255, 0, 0, 1),
+    0 0 15px rgba(255, 0, 0, 0.8),
+    0 0 30px rgba(255, 0, 0, 0.6);
+}
+
+@keyframes clickRipple {
+  0% {
+    width: 30px;
+    height: 30px;
+    opacity: 1;
+    box-shadow:
+      0 0 10px rgba(255, 0, 0, 1),
+      0 0 20px rgba(255, 0, 0, 0.9);
+  }
+  100% {
+    width: 80px;
+    height: 80px;
+    opacity: 0;
+    box-shadow:
+      0 0 20px rgba(255, 0, 0, 0.5),
+      0 0 40px rgba(255, 0, 0, 0.3),
+      0 0 60px rgba(255, 0, 0, 0.2);
+  }
+}
+/* //cursor */
+
+/* 버튼 스타일 */
+#topBtn h3 {
+  font-size: 14px;
+  padding-top: 8%;
+}
+#topBtn {
+  position: fixed;
+  bottom: 5%;
+  right: 5%;
+  display: none;
+  font-size: 40px;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  z-index: 9998;
+}
+@media (max-width: 940px) {
+  .cursor,
+  .ripple {
+    display: none;
+  }
+
+  #topBtn {
+    bottom: 3%;
+    font-size: 34px;
+  }
+}
+/* //버튼 스타일 */
+
+/* 여백 초기화 */
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+fieldset,
+form,
+legend,
+p,
+blockquote,
+th,
+td,
+input,
+select,
+button,
+figure,
+figcaption {
+  margin: 0;
+  padding: 0;
+}
+
+/* 시멘틱 태그 초기화 */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+/* 바디 BG 컬러 */
+body {
+  background: #101010;
+}
+
+/* 폰트 초기화 */
+body,
+button,
+input,
+select,
+table,
+textarea {
+  color: #aaaaaa;
+  font-family: "Pretendard";
+  font-size: 16px;
+  line-height: 1;
+}
+
+/* 링크 초기화 */
+a {
+  text-decoration: none;
+  color: #aaaaaa;
+}
+a:hover {
+  color: #ff0000;
+}
+
+/* 목록 초기화 */
+li,
+ol,
+ul {
+  list-style: none;
+}
+
+/* 제목 초기화 */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 16px;
+  font-weight: normal;
+}
+
+/* 폰트 스타일 초기화 */
+em,
+address {
+  font-style: normal;
+}
+
+/* 보더 초기화 */
+img,
+fieldset {
+  border: 0 none;
+}
+
+/* 버튼 초기화 */
+button {
+  border: 0 none;
+}
+
+/* 반응형 */
+video,
+img {
+  width: 100%;
+  vertical-align: top;
+}
+
+/* clearfix */
+/* float 사용할때 사용하는 효과 */
+.clearfix {
+  zoom: 1;
+}
+.clearfix::before,
+.clearfix::after {
+  content: "";
+  display: block;
+  line-height: 0;
+}
+.clearfix::after {
+  clear: both;
+}
+
+/* blind 효과 */
+.blind {
+  width: 0;
+  height: 0;
+  line-height: 0;
+  overflow: hidden;
+  position: absolute;
+  text-indent: -9999px;
+}
+
+/* IR 효과 */
+/* 의미있는 이미지의 대체 텍스트를 제공하는 경우(Phark Method) */
+.ir_pm {
+  display: block;
+  overflow: hidden;
+  font-size: 0;
+  line-height: 0;
+  text-indent: -9999px;
+}
+
+/* 의미있는 이미지의 대체 텍스트로 이미지가 없어도 대체 텍스트를 보여주고자 할 때(WA IR) */
+.ir_wa {
+  display: block;
+  overflow: hidden;
+  position: relative;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+}
+
+/* 대체 텍스트가 아닌 접근성을 위한 숨김 텍스트를 제공할 때(Screen Out*/
+.ir_so {
+  overflow: hidden;
+  position: absolute;
+  width: 0;
+  height: 0;
+  line-height: 0;
+  text-indent: -9999px;
+}
+
+/* 아이콘 이미지 최적화 작업 */
+.icon {
+  background-image: url("../img/icon.png");
+}
+
+/* input */
+input {
+  background-image: none;
+}
+input[type="button"],
+input[type="reset"],
+input[type="text"],
+input[type="password"],
+input[type="submit"],
+input[type="search"],
+input[type="tel"],
+input[type="email"] {
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+input:checked[type="checkbox"] {
+  background-color: #666;
+  -webkit-appearance: checkbox;
+}
+input:focus {
+  outline: none;
+  box-shadow: none;
+}
+select {
+  padding: 10px;
+  border: 0 none;
+  border-radius: none;
+  /* 커스텀 화살표 배경 이미지 */
+  /* background: url('arrow-down.png') no-repeat 95% 50%;
+  background-size: 15px;
+  width: 200px; */
+}
+select:hover {
+  border: 0 none;
+  border-radius: none;
+}
