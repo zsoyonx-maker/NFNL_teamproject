@@ -464,11 +464,11 @@
         <script>
             let swiper;
 
-            document.addEventListener('DOMContentLoaded', () => {
-                const wraps = document.querySelectorAll('.video-wrap');
+            document.addEventListener("DOMContentLoaded", () => {
+                const wraps = document.querySelectorAll(".video-wrap");
 
-                swiper = new Swiper('.NaNa', {
-                    effect: 'fade',
+                swiper = new Swiper(".NaNa", {
+                    effect: "fade",
                     speed: 800,
                     autoplay: {
                         delay: 2500,
@@ -477,65 +477,65 @@
                 });
 
                 wraps.forEach((wrap) => {
-                    const video = wrap.querySelector('video');
-                    const playBtn = wrap.querySelector('.play-btn');
-                    const muteBtn = wrap.querySelector('.mute-btn');
-                    const progress = wrap.querySelector('.progress');
-                    const current = wrap.querySelector('.current');
-                    const duration = wrap.querySelector('.duration');
+                    const video = wrap.querySelector("video");
+                    const playBtn = wrap.querySelector(".play-btn");
+                    const muteBtn = wrap.querySelector(".mute-btn");
+                    const progress = wrap.querySelector(".progress");
+                    const current = wrap.querySelector(".current");
+                    const duration = wrap.querySelector(".duration");
 
                     // ▶ 재생/정지
-                    playBtn.addEventListener('click', () => {
+                    playBtn.addEventListener("click", () => {
                         if (video.paused) {
                             video.play();
-                            playBtn.textContent = '⏸';
+                            playBtn.textContent = "⏸";
                             swiper.autoplay.stop();
                         } else {
                             video.pause();
-                            playBtn.textContent = '▶';
+                            playBtn.textContent = "▶";
                             swiper.autoplay.start();
                         }
                     });
 
                     // ⏱ duration 세팅
-                    video.addEventListener('loadedmetadata', () => {
+                    video.addEventListener("loadedmetadata", () => {
                         duration.textContent = formatTime(video.duration);
                     });
 
                     // 📊 progress + time
-                    video.addEventListener('timeupdate', () => {
+                    video.addEventListener("timeupdate", () => {
                         const percent = (video.currentTime / video.duration) * 100;
-                        progress.style.width = percent + '%';
+                        progress.style.width = percent + "%";
 
                         current.textContent = formatTime(video.currentTime);
                     });
 
                     // ▶ 끝
-                    video.addEventListener('ended', () => {
-                        playBtn.textContent = '▶';
+                    video.addEventListener("ended", () => {
+                        playBtn.textContent = "▶";
                         swiper.autoplay.start();
                     });
                 });
 
                 // 슬라이드 변경 초기화
-                swiper.on('slideChange', () => {
+                swiper.on("slideChange", () => {
                     wraps.forEach((wrap) => {
-                        const video = wrap.querySelector('video');
-                        const playBtn = wrap.querySelector('.play-btn');
-                        const progress = wrap.querySelector('.progress');
+                        const video = wrap.querySelector("video");
+                        const playBtn = wrap.querySelector(".play-btn");
+                        const progress = wrap.querySelector(".progress");
 
                         video.pause();
                         video.currentTime = 0;
 
-                        playBtn.textContent = '▶';
-                        progress.style.width = '0%';
+                        playBtn.textContent = "▶";
+                        progress.style.width = "0%";
                     });
                 });
 
                 function formatTime(sec) {
                     const m = Math.floor(sec / 60);
                     const s = Math.floor(sec % 60);
-                    return `${m}:${s < 10 ? '0' : ''}${s}`;
+                    return `${m}:${s < 10 ? "0" : ""}${s}`;
                 }
             });
         </script>
@@ -543,9 +543,9 @@
         <!-- cursor -->
         <script>
             // mouse effect
-            const cursor = document.getElementById('cursor');
-            const cursorImg = document.getElementById('cursorImg');
-            const targets = document.querySelectorAll('.hover-target');
+            const cursor = document.getElementById("cursor");
+            const cursorImg = document.getElementById("cursorImg");
+            const targets = document.querySelectorAll(".hover-target");
 
             let isHover = false;
             let rippleInterval = null;
@@ -553,19 +553,19 @@
             let mouseY = 0;
 
             // 마우스 위치 추적
-            window.addEventListener('mousemove', (e) => {
+            window.addEventListener("mousemove", (e) => {
                 mouseX = e.clientX;
                 mouseY = e.clientY;
-                cursor.style.left = mouseX + 'px';
-                cursor.style.top = mouseY + 'px';
+                cursor.style.left = mouseX + "px";
+                cursor.style.top = mouseY + "px";
             });
 
             // 다중 여러 요소 hover
             targets.forEach((el) => {
-                el.addEventListener('mouseenter', () => {
+                el.addEventListener("mouseenter", () => {
                     isHover = true;
                     // cursorImg.src = "assseticons/m1_50_g.png";
-                    cursorImg.src = 'assets/icons/m1_50_r.png';
+                    cursorImg.src = "assets/icons/m1_50_r.png";
 
                     // 일정 간격으로 ripple 생성
                     rippleInterval = setInterval(() => {
@@ -574,9 +574,9 @@
                 });
 
                 // hover 종료
-                el.addEventListener('mouseleave', () => {
+                el.addEventListener("mouseleave", () => {
                     isHover = false;
-                    cursorImg.src = 'assets/icons/m1_50_g.png';
+                    cursorImg.src = "assets/icons/m1_50_g.png";
 
                     // cursorImg.src = "assets/icons/m1_50_r.png";
                     clearInterval(rippleInterval);
@@ -585,20 +585,20 @@
 
             // ripple
             function createRipple(x, y) {
-                const ripple = document.createElement('div');
-                ripple.className = 'ripple';
-                ripple.style.left = x + 'px';
-                ripple.style.top = y + 'px';
+                const ripple = document.createElement("div");
+                ripple.className = "ripple";
+                ripple.style.left = x + "px";
+                ripple.style.top = y + "px";
                 document.body.appendChild(ripple);
                 // 번지는 속도 조절
                 setTimeout(() => ripple.remove(), 3000);
             }
             // click ripple
             function createClickRipple(x, y) {
-                const ripple = document.createElement('div');
-                ripple.className = 'click-ripple';
-                ripple.style.left = x + 'px';
-                ripple.style.top = y + 'px';
+                const ripple = document.createElement("div");
+                ripple.className = "click-ripple";
+                ripple.style.left = x + "px";
+                ripple.style.top = y + "px";
                 document.body.appendChild(ripple);
                 setTimeout(() => ripple.remove(), 800);
             }
@@ -647,19 +647,19 @@
             // }
 
             // click
-            window.addEventListener('mousedown', (e) => {
-                cursorImg.src = 'assets/icons/m5_50_r.png';
-                cursor.style.width = '35px';
-                cursor.style.height = '35px';
+            window.addEventListener("mousedown", (e) => {
+                cursorImg.src = "assets/icons/m5_50_r.png";
+                cursor.style.width = "35px";
+                cursor.style.height = "35px";
                 createClickRipple(e.clientX, e.clientY);
                 createExplosion(e.clientX, e.clientY);
             });
 
-            window.addEventListener('mouseup', () => {
+            window.addEventListener("mouseup", () => {
                 // cursorImg.src = isHover ? "assets/icons/m1_50_g.png" : "assets/icons/m1_50_r.png";
-                cursorImg.src = isHover ? 'assets/icons/m1_50_r.png' : 'assets/icons/m1_50_g.png';
-                cursor.style.width = '50px';
-                cursor.style.height = '50px';
+                cursorImg.src = isHover ? "assets/icons/m1_50_r.png" : "assets/icons/m1_50_g.png";
+                cursor.style.width = "50px";
+                cursor.style.height = "50px";
             });
         </script>
     </body>
